@@ -30,7 +30,6 @@ def main():
 
     # 2. Tweet Metnini Oluştur
     tweet = f"📢 YKS 2026'ya Son {kalan_gun} GÜN {kalan_saat} SAAT! ⏳\n\n" \
-            f"Zaman akıp gidiyor.\
             f"#yks2026 #yks"
 
     # 3. Twitter'a Bağlan ve Gönder
