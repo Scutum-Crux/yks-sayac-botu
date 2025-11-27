@@ -1,0 +1,37 @@
+name: YKS Sayac Botu
+
+on:
+  schedule:
+    # UTC saatiyle 05:00, Türkiye saatiyle 08:00 demektir.
+    - cron: '0 5 * * *'
+  
+  # Bunu ekledim ki istersen butona basıp manuel test edebil.
+  workflow_dispatch:
+
+jobs:
+  tweet_at:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. GitHub'daki kodlarını (bot.py) sanal makineye çeker
+      - name: Depoyu Kontrol Et
+        uses: actions/checkout@v3
+
+      # 2. Python 3.9 kurulumu yapar
+      - name: Python Kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 3. Twitter kütüphanesini yükler
+      - name: Kütüphaneleri Yükle
+        run: pip install tweepy
+
+      # 4. Botu çalıştırır (Şifreleri gizli kasadan alır)
+      - name: Botu Çalıştır
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        run: python bot.py
