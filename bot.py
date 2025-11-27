@@ -3,12 +3,11 @@ from datetime import datetime
 import os
 
 # --- AYARLAR ---
-# Hedef Tarih: 20 Haziran 2026 (Cumartesi sabah 10:15 varsayımı)
-# Yıl: 2026, Ay: 6, Gün: 20
-HEDEF_TARIH = datetime(2026, 6, 20, 10, 15) 
-UYGULAMA_LINKI = "https://play.google.com/store/apps/details?id=senin.uygulama.adresi" # Linkini buraya yapıştır
+# Hedef: 20 Haziran 2026, Saat 10:00
+HEDEF_TARIH = datetime(2026, 6, 20, 10, 0) 
+UYGULAMA_LINKI = "https://play.google.com/store/apps/details?id=senin.uygulama.adresi" # Linkini unutma
 
-# API Anahtarları (GitHub Secrets'tan çekecek)
+# API Anahtarları (GitHub Secrets'tan çeker)
 api_key = os.environ.get("API_KEY")
 api_secret = os.environ.get("API_SECRET")
 access_token = os.environ.get("ACCESS_TOKEN")
@@ -20,7 +19,7 @@ def main():
     kalan = HEDEF_TARIH - bugun
     kalan_gun = kalan.days
     
-    # Saati de hesaplayalım
+    # Saati Hesapla
     kalan_saniye = kalan.seconds
     kalan_saat = kalan_saniye // 3600
     
@@ -28,8 +27,14 @@ def main():
         print("Sınav tarihi geçti! Hedef tarihi güncellemeyi unutma.")
         return
 
-    # 2. Tweet Metnini Oluştur
-    tweet = f"📢 YKS 2026'ya Son {kalan_gun} GÜN {kalan_saat} SAAT! ⏳\n\n" \
+    # 2. Akıllı Metin Oluşturma (0 Saat ise gösterme)
+    if kalan_saat > 0:
+        zaman_metni = f"{kalan_gun} GÜN {kalan_saat} SAAT"
+    else:
+        zaman_metni = f"{kalan_gun} GÜN"
+
+    # Tweet Metni (Satır boşlukları ayarlı)
+    tweet = f"📢 YKS 2026'ya Son {zaman_metni} Kaldı! ⏳\n\n" \
             f"#yks2026 #yks"
 
     # 3. Twitter'a Bağlan ve Gönder
