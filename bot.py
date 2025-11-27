@@ -30,9 +30,8 @@ def main():
 
     # 2. Tweet Metnini Oluştur
     tweet = f"📢 YKS 2026'ya Son {kalan_gun} GÜN {kalan_saat} SAAT! ⏳\n\n" \
-            f"Zaman akıp gidiyor. Bugün hedeflerin için ne yaptın?\n\n" \
-            f"🚀 Eksiklerini görüp netlerini artırmak için: {UYGULAMA_LINKI}\n\n" \
-            f"#yks2026 #tyt #ayt #yks #motivasyon #sınav"
+            f"Zaman akıp gidiyor.\
+            f"#yks2026 #yks"
 
     # 3. Twitter'a Bağlan ve Gönder
     client = tweepy.Client(
